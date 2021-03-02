@@ -2,7 +2,7 @@
 Tugas 1 Modsim
 
 ## How to run
-- Open root directory
+- Open root directory 👌👌
     
 ```
     make run
