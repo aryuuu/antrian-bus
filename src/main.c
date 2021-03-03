@@ -49,7 +49,9 @@
 #define LIST_QUEUE_CAR_RENTAL 1
 #define LIST_QUEUE_TERMINAL_1 2
 #define LIST_QUEUE_TERMINAL_2 3
-#define LIST_BUS 4
+#define LIST_BUS_TO_CAR_RENTAL 4
+#define LIST_BUS_TO_TERMINAL_1 5
+#define LIST_BUS_TO_TERMINAL_2 6
 
 int bus_location;
 double bus_wait_time;
@@ -78,7 +80,9 @@ void arrive_car_rental() {
   /* Check if Bus in Car Rental */
   if (bus_location == CAR_RENTAL) {
     /* Bus Full */
-    if (list_size[LIST_BUS] == 20) {
+    if (list_size[LIST_BUS_TO_CAR_RENTAL] + list_size[LIST_BUS_TO_TERMINAL_1] +
+            list_size[LIST_BUS_TO_TERMINAL_2] ==
+        20) {
       transfer[1] = sim_time;
       transfer[2] = random_destination();
       list_file(LAST, LIST_QUEUE_CAR_RENTAL);
@@ -99,12 +103,17 @@ void load_car_rental() {
   bus_wait_time = sim_time;
   transfer[1] = sim_time;
   transfer[2] = random_destination();
-  list_file(LAST, LIST_BUS);
+
+  if (transfer[2] == TERMINAL_1) {
+    list_file(LAST, LIST_BUS_TO_TERMINAL_1);
+  } else {
+    list_file(LAST, LIST_BUS_TO_TERMINAL_2);
+  }
 }
 
 void unload_car_rental() {
   bus_wait_time = sim_time;
-  list_remove(FIRST, LIST_BUS);
+  list_remove(FIRST, LIST_BUS_TO_CAR_RENTAL);
 }
 
 void arrive_terminal_1() {
@@ -113,7 +122,9 @@ void arrive_terminal_1() {
                  EVENT_ARRIVAL_TERMINAL_1);
 
   /* Bus Full */
-  if (list_size[LIST_BUS] == 20) {
+  if (list_size[LIST_BUS_TO_CAR_RENTAL] + list_size[LIST_BUS_TO_TERMINAL_1] +
+          list_size[LIST_BUS_TO_TERMINAL_2] ==
+      20) {
     transfer[1] = sim_time;
     list_file(LAST, LIST_QUEUE_TERMINAL_1);
   }
@@ -125,7 +136,9 @@ void arrive_terminal_2() {
                  EVENT_ARRIVAL_TERMINAL_2);
 
   /* Bus Full */
-  if (list_size[LIST_BUS] == 20) {
+  if (list_size[LIST_BUS_TO_CAR_RENTAL] + list_size[LIST_BUS_TO_TERMINAL_1] +
+          list_size[LIST_BUS_TO_TERMINAL_2] ==
+      20) {
     transfer[1] = sim_time;
     list_file(LAST, LIST_QUEUE_TERMINAL_2);
   }
