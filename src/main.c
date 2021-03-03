@@ -18,6 +18,9 @@
 
 #define BUS_SPEED 30
 
+/* GLOBAL VARS */
+int GLOBAL_CLOCK = 0;
+
 struct Queue {};
 
 /**
@@ -32,9 +35,28 @@ void generate_passenger();
  */
 void move_bus();
 
-void load_passenger();
+/**
+ * @brief load passenger on a location
+ *
+ * @param location loading location
+ * location's value should be 1 for car rental, 2 for terminal-1 and 3 for
+ * terminal-2
+ */
+void load_passenger(int location);
 
-void unload_passenger();
+/**
+ * @brief unload passenger on a location
+ *
+ * @param location unloading location
+ */
+void unload_passenger(int location);
+
+/**
+ * @brief Tick the global clock
+ *
+ * @param n time in seconds
+ */
+void tick_clock(int n);
 
 int main() {
   int result = 0;
