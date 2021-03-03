@@ -21,8 +21,6 @@
 /* GLOBAL VARS */
 int GLOBAL_CLOCK = 0;
 
-struct Queue {};
-
 /**
  * @brief generate passenger and push it to each queues in terminals
  *
@@ -57,6 +55,8 @@ void unload_passenger(int location);
  * @param n time in seconds
  */
 void tick_clock(int n);
+
+void generate_report();
 
 int main() {
   int result = 0;
