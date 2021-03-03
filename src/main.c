@@ -28,7 +28,7 @@
 #define STREAM_LOADING_TIME 5
 #define STREAM_DESTINATION 6
 
-#define BUS_SPEED 30 
+#define BUS_SPEED 30
 
 // Queue
 #define QUEUE_CAR_RENTAL 1
@@ -43,6 +43,7 @@
 #define EVENT_DEPART_TERMINAL_1 4
 #define EVENT_ARRIVAL_TERMINAL_2 5
 #define EVENT_DEPART_TERMINAL_2 6
+#define EVENT_SIMULATION_END 7
 
 /**
  * @brief generate passenger and push it to each queues in terminals
@@ -75,38 +76,19 @@ void unload_passenger(int location);
 void generate_report();
 
 /* CAR RENTAL FUNCTION */
-void car_rental_depart()
-{
-  printf("depart car rental");
-}
+void car_rental_depart() { printf("depart car rental"); }
 
-void car_rental_arrival()
-{
-  
-  printf("arrival car rental");
-}
+void car_rental_arrival() { printf("arrival car rental"); }
 
 /* TERMINAL 1 FUNCTION */
-void terminal_1_depart()
-{
-  printf("depart terminal 1");
-}
+void terminal_1_depart() { printf("depart terminal 1"); }
 
-void terminal_1_arrival()
-{
-  printf("arrival terminal 1");
-}
+void terminal_1_arrival() { printf("arrival terminal 1"); }
 
 /* TERMINAL 2 FUNCTION */
-void terminal_2_depart()
-{
-  printf("depart terminal 2");
-}
+void terminal_2_depart() { printf("depart terminal 2"); }
 
-void terminal_2_arrival()
-{
-  printf("arrival terminal 2");
-}
+void terminal_2_arrival() { printf("arrival terminal 2"); }
 
 int main() {
   /* Initialize simlib */
@@ -117,31 +99,32 @@ int main() {
 
   /* Bus Start from Car Rental */
   event_schedule(0, EVENT_ARRIVAL_CAR_RENTAL);
+  event_schedule(SIMULATION_DURATION, EVENT_SIMULATION_END);
 
   while (list_size[LIST_EVENT] > 0) {
     /* Determine the next event. */
     timing();
 
     switch (next_event_type) {
-      // Bus in Car Rental
-      case EVENT_ARRIVAL_CAR_RENTAL:
-        car_rental_arrival();
-        break;
-      case EVENT_DEPART_CAR_RENTAL:
-        car_rental_depart();
-        break;
-      case EVENT_ARRIVAL_TERMINAL_1:
-        terminal_1_arrival();
-        break;
-      case EVENT_DEPART_TERMINAL_1:
-        terminal_1_depart();
-        break;
-      case EVENT_ARRIVAL_TERMINAL_2:
-        terminal_2_arrival();
-        break;
-      case EVENT_DEPART_TERMINAL_2:
-        terminal_2_depart();
-        break;
+    // Bus in Car Rental
+    case EVENT_ARRIVAL_CAR_RENTAL:
+      car_rental_arrival();
+      break;
+    case EVENT_DEPART_CAR_RENTAL:
+      car_rental_depart();
+      break;
+    case EVENT_ARRIVAL_TERMINAL_1:
+      terminal_1_arrival();
+      break;
+    case EVENT_DEPART_TERMINAL_1:
+      terminal_1_depart();
+      break;
+    case EVENT_ARRIVAL_TERMINAL_2:
+      terminal_2_arrival();
+      break;
+    case EVENT_DEPART_TERMINAL_2:
+      terminal_2_depart();
+      break;
     }
   }
 
