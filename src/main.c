@@ -59,6 +59,7 @@ void tick_clock(int n);
 void generate_report();
 
 int main() {
+  printf("Hello modsim\n");
   int result = 0;
   return result;
 }

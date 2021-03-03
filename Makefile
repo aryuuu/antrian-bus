@@ -1,8 +1,8 @@
 all: build run
 run: build
-	./antrian
+	bin/antrian
 build:
-	gcc -lm main.c simlib.c -o antrian
+	gcc -lm src/main.c src/lib/simlib.c -o bin/antrian
 
 clean:
 	@echo "Cleaning up..."
