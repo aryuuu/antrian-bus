@@ -1,5 +1,6 @@
 #include "queue.h"
 #include "random.h"
+#include "sample.h"
 
 // Event Trigger from Bus
 #define EVENT_BUS_TERMINAL_1 1
@@ -39,6 +40,8 @@ void unload_bus(int stop_location)
         while (list_size[LIST_BUS_TO_CAR_RENTAL] > 0)
         {
             list_remove(FIRST, LIST_BUS_TO_CAR_RENTAL);
+            double delay = sim_time - transfer[1];
+            sampst(delay, DELAY + CAR_RENTAL - 1);
             unload_time += random_unload_time();
         }
         event_cancel(EVENT_BUS_GO_TO_TERMINAL_1);
@@ -50,6 +53,8 @@ void unload_bus(int stop_location)
         while (list_size[LIST_BUS_TO_TERMINAL_1] > 0)
         {
             list_remove(FIRST, LIST_BUS_TO_TERMINAL_1);
+            double delay = sim_time - transfer[1];
+            sampst(delay, DELAY + TERMINAL_1 - 1);
             unload_time += random_unload_time();
         }
         event_cancel(EVENT_BUS_GO_TO_TERMINAL_2);
@@ -61,6 +66,8 @@ void unload_bus(int stop_location)
         while (list_size[LIST_BUS_TO_TERMINAL_2] > 0)
         {
             list_remove(FIRST, LIST_BUS_TO_TERMINAL_2);
+            double delay = sim_time - transfer[1];
+            sampst(delay, DELAY + TERMINAL_2 - 1);
             unload_time += random_unload_time();
         }
         event_cancel(EVENT_BUS_GO_TO_CAR_RENTAL);
@@ -76,7 +83,8 @@ void load_bus(int from_location)
         while (bus_num_passenger() < 20 && list_size[LIST_QUEUE_CAR_RENTAL] > 0)
         {
             list_remove(FIRST, LIST_QUEUE_CAR_RENTAL);
-            double wait_time = sim_time - transfer[1];
+            double delay = sim_time - transfer[1];
+            sampst(delay, DELAY + CAR_RENTAL - 1);
             double destination = transfer[2];
 
             if (destination == TERMINAL_1)
@@ -101,6 +109,8 @@ void load_bus(int from_location)
         while (bus_num_passenger() < 20 && list_size[LIST_QUEUE_TERMINAL_1] > 0)
         {
             list_remove(FIRST, LIST_QUEUE_TERMINAL_1);
+            double delay = sim_time - transfer[1];
+            sampst(delay, DELAY + TERMINAL_1 - 1);
             list_file(LAST, LIST_BUS_TO_CAR_RENTAL);
 
             load_time += random_load_time();
@@ -114,6 +124,8 @@ void load_bus(int from_location)
         while (bus_num_passenger() < 20 && list_size[LIST_QUEUE_TERMINAL_2] > 0)
         {
             list_remove(FIRST, LIST_QUEUE_TERMINAL_2);
+            double delay = sim_time - transfer[1];
+            sampst(delay, DELAY + TERMINAL_2 - 1);
             list_file(LAST, LIST_BUS_TO_CAR_RENTAL);
 
             load_time += random_load_time();
