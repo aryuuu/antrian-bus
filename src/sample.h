@@ -2,4 +2,7 @@
 // For each queue is +3
 #define NUMBER_QUEUE 1
 #define DELAY 4
-
+#define TOTAL_PASSENGER 8
+#define STOP_TIME_CAR_RENTAL 9
+#define STOP_TIME_TERMINAL_1 10
+#define STOP_TIME_TERMINAL_2 11
