@@ -164,18 +164,27 @@ int main() {
       // printf("G T C\n");
       bus_location = ROAD;
       sampst(sim_time - bus_wait_time, STOP_TIME_TERMINAL_2);
+      sampst(list_size[LIST_BUS_TO_TERMINAL_1] + list_size[LIST_BUS_TO_TERMINAL_2] +
+             list_size[LIST_BUS_TO_CAR_RENTAL],
+         TOTAL_PASSENGER);
       event_schedule(sim_time + DURATION_TO_CAR_RENTAL, EVENT_BUS_CAR_RENTAL);
       break;
     case EVENT_BUS_GO_TO_TERMINAL_1:
       // printf("G T T1\n");
       bus_location = ROAD;
       sampst(sim_time - bus_wait_time, STOP_TIME_CAR_RENTAL);
+      sampst(list_size[LIST_BUS_TO_TERMINAL_1] + list_size[LIST_BUS_TO_TERMINAL_2] +
+             list_size[LIST_BUS_TO_CAR_RENTAL],
+         TOTAL_PASSENGER);
       event_schedule(sim_time + DURATION_TO_TERMINAL_1, EVENT_BUS_TERMINAL_1);
       break;
     case EVENT_BUS_GO_TO_TERMINAL_2:
       // printf("G T T2\n");
       bus_location = ROAD;
       sampst(sim_time - bus_wait_time, STOP_TIME_TERMINAL_1);
+      sampst(list_size[LIST_BUS_TO_TERMINAL_1] + list_size[LIST_BUS_TO_TERMINAL_2] +
+             list_size[LIST_BUS_TO_CAR_RENTAL],
+         TOTAL_PASSENGER);
       event_schedule(sim_time + DURATION_TO_TERMINAL_2, EVENT_BUS_TERMINAL_2);
       break;
 

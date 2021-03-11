@@ -60,9 +60,6 @@ double unload_bus(int stop_location)
       unload_time += random_unload_time();
     }
   }
-  sampst(list_size[LIST_BUS_TO_TERMINAL_1] + list_size[LIST_BUS_TO_TERMINAL_2] +
-             list_size[LIST_BUS_TO_CAR_RENTAL],
-         TOTAL_PASSENGER);
   return unload_time;
 }
 
@@ -114,9 +111,6 @@ double load_bus(int from_location)
       load_time += random_load_time();
     }
   }
-  sampst(list_size[LIST_BUS_TO_TERMINAL_1] + list_size[LIST_BUS_TO_TERMINAL_2] +
-             list_size[LIST_BUS_TO_CAR_RENTAL],
-         TOTAL_PASSENGER);
   return load_time;
 }
 
