@@ -41,7 +41,9 @@ double unload_bus(int stop_location)
     while (list_size[LIST_BUS_TO_CAR_RENTAL] > 0)
     {
       list_remove(FIRST, LIST_BUS_TO_CAR_RENTAL);
-      unload_time += random_unload_time();
+      double person_unload = random_unload_time();
+      sampst(sim_time + person_unload - transfer[1], PERSON_IN_SYSTEM + transfer[3] - 1); // Person in System
+      unload_time += person_unload;
     }
   }
   else if (stop_location == TERMINAL_1)
@@ -49,7 +51,9 @@ double unload_bus(int stop_location)
     while (list_size[LIST_BUS_TO_TERMINAL_1] > 0)
     {
       list_remove(FIRST, LIST_BUS_TO_TERMINAL_1);
-      unload_time += random_unload_time();
+      double person_unload = random_unload_time();
+      sampst(sim_time + person_unload - transfer[1], PERSON_IN_SYSTEM + transfer[3] - 1); // Person in System
+      unload_time += person_unload;
     }
   }
   else if (stop_location == TERMINAL_2)
@@ -57,7 +61,9 @@ double unload_bus(int stop_location)
     while (list_size[LIST_BUS_TO_TERMINAL_2] > 0)
     {
       list_remove(FIRST, LIST_BUS_TO_TERMINAL_2);
-      unload_time += random_unload_time();
+      double person_unload = random_unload_time();
+      sampst(sim_time + person_unload - transfer[1], PERSON_IN_SYSTEM + transfer[3] - 1); // Person in System
+      unload_time += person_unload;
     }
   }
   return unload_time;
@@ -151,10 +157,16 @@ void people_in(int location, double bus_wait_time)
   {
     if (destination == TERMINAL_1)
     {
+      transfer[1] = sim_time; // Time person arrival in system
+      transfer[2] = destination;
+      transfer[3] = location; // ARRIVAL
       list_file(LAST, LIST_BUS_TO_TERMINAL_1);
     }
     else if (destination == TERMINAL_2)
     {
+      transfer[1] = sim_time; // Time person arrival in system
+      transfer[2] = destination;
+      transfer[3] = location; // ARRIVAL
       list_file(LAST, LIST_BUS_TO_TERMINAL_2);
     }
 
@@ -169,6 +181,9 @@ void people_in(int location, double bus_wait_time)
   }
   else if (location == TERMINAL_1 || location == TERMINAL_2)
   {
+    transfer[1] = sim_time; // Time person arrival in system
+    transfer[2] = CAR_RENTAL;
+    transfer[3] = location; // ARRIVAL
     list_file(LAST, LIST_BUS_TO_CAR_RENTAL);
 
     double load_time = random_load_time();
@@ -199,6 +214,7 @@ void people_queue(int location)
   int destination = random_destination();
   transfer[1] = sim_time;
   transfer[2] = destination;
+  transfer[3] = location; // ARRIVAL
   if (location == CAR_RENTAL)
   {
     list_file(LAST, LIST_QUEUE_CAR_RENTAL);
