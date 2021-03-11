@@ -1,4 +1,3 @@
-// Queue
 #define LIST_QUEUE_CAR_RENTAL 1
 #define LIST_QUEUE_TERMINAL_1 2
 #define LIST_QUEUE_TERMINAL_2 3

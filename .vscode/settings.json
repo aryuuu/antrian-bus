@@ -4,6 +4,7 @@
         "event.h": "c",
         "events.h": "c",
         "location.h": "c",
-        "duration.h": "c"
+        "duration.h": "c",
+        "queue.h": "c"
     }
 }
