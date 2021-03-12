@@ -43,16 +43,16 @@ double random_unload_time()
 
 double random_arrival_time(int location)
 {
-    if (location == CAR_RENTAL)
-    {
-        return expon(CAR_RENTAL_ARRIVAL_RATE, STREAM_CAR_RENTAL) * 3600;
-    }
-    else if (location == TERMINAL_1)
-    {
-        return expon(TERMINAL_1_ARRIVAL_RATE, STREAM_TERMINAL_1) * 3600;
-    }
-    else if (location == TERMINAL_2)
-    {
-        return expon(TERMINAL_2_ARRIVAL_RATE, STREAM_TERMINAL_2) * 3600;
-    }
+  if (location == CAR_RENTAL)
+  {    
+    return expon(1.00 / CAR_RENTAL_ARRIVAL_RATE * 3600.0, STREAM_CAR_RENTAL);
+  }
+  else if (location == TERMINAL_1)
+  {
+    return expon(1.00 / TERMINAL_1_ARRIVAL_RATE * 3600.0, STREAM_TERMINAL_1);
+  }
+  else if (location == TERMINAL_2)
+  {
+    return expon(1.00 / TERMINAL_2_ARRIVAL_RATE * 3600.0, STREAM_TERMINAL_2);
+  }
 }

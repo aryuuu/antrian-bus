@@ -176,7 +176,7 @@ int main()
       break;
 
     case EVENT_PEOPLE_CAR_RENTAL:
-      // Schedule next
+      // Schedule next      
       event_schedule(sim_time + random_arrival_time(CAR_RENTAL),
                      EVENT_PEOPLE_CAR_RENTAL);
 
@@ -184,6 +184,7 @@ int main()
       {
         // printf("PC in\n");
         people_in(CAR_RENTAL, bus_wait_time);
+        // sampst(list_size[LIST_QUEUE_CAR_RENTAL], NUMBER_QUEUE + CAR_RENTAL - 1);
       }
       else
       {
@@ -201,6 +202,7 @@ int main()
       {
         // printf("PT1 in\n");
         people_in(TERMINAL_1, bus_wait_time);
+        // sampst(list_size[LIST_QUEUE_TERMINAL_1], NUMBER_QUEUE + TERMINAL_1 - 1);
       }
       else
       {
@@ -217,6 +219,7 @@ int main()
       {
         // printf("PT2 in\n");
         people_in(TERMINAL_2, bus_wait_time);
+        // sampst(list_size[LIST_QUEUE_TERMINAL_2], NUMBER_QUEUE + TERMINAL_2 - 1);
       }
       else
       {
